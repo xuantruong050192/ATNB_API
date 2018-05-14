@@ -8,9 +8,10 @@ namespace DAO
 {
     public interface IRepository<T>
     {
+        int GetTotalRecord();
         T GetById(int id);
 
-        List<T> GetAll();
+       IQueryable<T> GetAll();
 
         void Edit(T entity);
 

@@ -15,5 +15,6 @@ namespace DTO
         public string Password { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<System.DateTime> Created { get; set; }
     }
 }

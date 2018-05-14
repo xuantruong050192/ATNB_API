@@ -10,7 +10,8 @@ namespace DAO
     public partial class UnitOfWork : IUnitOfWork
     {
         private IRepository<Category> _categoryRepository;
-        private BookStoreDbContext _context;
+        //private BookStoreDbContext _context;
+        public BookManagementDbContext _context;
         public IRepository<Category> CategoryRepository
         {
             get
@@ -25,7 +26,7 @@ namespace DAO
 
         public UnitOfWork()
         {
-            _context = new BookStoreDbContext();
+            _context = new BookManagementDbContext();
         }
 
         public void Save()

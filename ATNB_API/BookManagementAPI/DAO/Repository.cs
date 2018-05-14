@@ -11,26 +11,30 @@ namespace DAO
     {
 
 
-        public BookStoreDbContext _context;
+        public BookManagementDbContext _context;
         public IDbSet<T> dbset;
-        public Repository(BookStoreDbContext context)
+        public Repository(BookManagementDbContext context)
         {
 
 
             this._context = context;
-            dbset = context.Set<T>(); 
+            dbset = context.Set<T>();
         }
 
         public T GetById(int id)
         {
             return dbset.Find(id);
         }
+        public int GetTotalRecord()
+        {
+            return dbset.Count();
+        }
 
 
-        public List<T> GetAll()
+        public IQueryable<T> GetAll()
         {
 
-            return dbset.AsQueryable().ToList();
+            return dbset.AsQueryable();
 
         }
 
