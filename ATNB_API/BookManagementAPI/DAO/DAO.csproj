@@ -51,15 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookStoreDbContext.Context.cs">
+    <Compile Include="BookManagementDbContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BookStoreDbContext.Context.tt</DependentUpon>
+      <DependentUpon>BookManagementDbContext.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="BookStoreDbContext.Designer.cs">
+    <Compile Include="BookManagementDbContext.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BookStoreDbContext.edmx</DependentUpon>
+      <DependentUpon>BookManagementDbContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="IRepository.cs" />
     <Compile Include="IUnitOfWork.cs" />
@@ -69,12 +69,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
-    <EntityDeploy Include="BookStoreDbContext.edmx">
+    <EntityDeploy Include="BookManagementDbContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BookStoreDbContext.Designer.cs</LastGenOutput>
+      <LastGenOutput>BookManagementDbContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="BookStoreDbContext.edmx.diagram">
-      <DependentUpon>BookStoreDbContext.edmx</DependentUpon>
+    <None Include="BookManagementDbContext.edmx.diagram">
+      <DependentUpon>BookManagementDbContext.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -88,15 +88,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BookStoreDbContext.Context.tt">
+    <Content Include="BookManagementDbContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BookStoreDbContext.edmx</DependentUpon>
-      <LastGenOutput>BookStoreDbContext.Context.cs</LastGenOutput>
+      <DependentUpon>BookManagementDbContext.edmx</DependentUpon>
+      <LastGenOutput>BookManagementDbContext.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="BookStoreDbContext.tt">
+    <Content Include="BookManagementDbContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BookStoreDbContext.edmx</DependentUpon>
-      <LastGenOutput>BookStoreDbContext.cs</LastGenOutput>
+      <DependentUpon>BookManagementDbContext.edmx</DependentUpon>
+      <LastGenOutput>BookManagementDbContext.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -11,7 +11,7 @@ namespace DTO
 
     public partial class Author
     {
-      
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Author()
         {
             this.Books = new HashSet<Book>();
@@ -20,7 +20,7 @@ namespace DTO
         public int AuthorID { get; set; }
         public string AuthorName { get; set; }
         public string History { get; set; }
-        public Nullable<bool> Active { get; set; }
+        public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> Created { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

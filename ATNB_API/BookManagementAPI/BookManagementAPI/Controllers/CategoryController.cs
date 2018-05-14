@@ -13,8 +13,8 @@ namespace BookManagementAPI.Controllers
     public class CategoryController : ApiController
     {
         [HttpGet]
-        [Route("api/category/{skip}/{pagesize}")]
-        public HttpResponseMessage GetAllCategory(int skip, int pagesize)
+        [Route("api/category/{searchname}/{skip}/{pagesize}")]
+        public HttpResponseMessage GetAllCategory(string searchname,int skip, int pagesize)
         {
             object obj;
             try
@@ -24,8 +24,35 @@ namespace BookManagementAPI.Controllers
                     obj = new
                     {
                         StatusCode = 200,
-                        data = _unitOfWork.CategoryRepository.GetAll().Where(x => x.Active == true).OrderByDescending(x => x.Created).Skip(skip * pagesize).Take(pagesize).ToList(),
-                        total = _unitOfWork.CategoryRepository.GetTotalRecord()
+                        data = _unitOfWork.CategoryRepository.GetAll().Where(x => (x.IsActive==true && x.CategoryName.Contains(searchname)) || (x.IsActive==true && searchname=="0")).OrderByDescending(x => x.Created).Skip(skip * pagesize).Take(pagesize).ToList(),
+                        total = _unitOfWork._context.Categories.Count(x => (x.IsActive == true && x.CategoryName.Contains(searchname)) || (x.IsActive == true && searchname == "0"))
+                    };
+
+
+            }
+            catch (Exception ex)
+            {
+                obj = new { StatusCode = 500, data = new List<Category>() };
+            }
+            return Request.CreateResponse(obj);
+
+
+
+        }
+        [HttpGet]
+        [Route("api/category/searchbyname/{searchname}/{skip}/{pagesize}")]
+        public HttpResponseMessage SearchCategoryByName(string searchname, int skip, int pagesize)
+        {
+            object obj;
+            try
+            {
+                using (var _unitOfWork = new UnitOfWork())
+
+                    obj = new
+                    {
+                        StatusCode = 200,
+                        data = _unitOfWork.CategoryRepository.GetAll().Where(x => x.IsActive == true && x.CategoryName.Contains(searchname)).OrderByDescending(x => x.Created).Skip(skip * pagesize).Take(pagesize).ToList(),
+                        total = _unitOfWork._context.Categories.Count(x => x.IsActive == true)
                     };
 
 
@@ -70,7 +97,7 @@ namespace BookManagementAPI.Controllers
             {
                 using (var _unitOfWork = new UnitOfWork())
                 {
-                    p_Category.Active = true;
+                    p_Category.IsActive = true;
                     p_Category.Created = DateTime.Now;
 
 
@@ -124,7 +151,7 @@ namespace BookManagementAPI.Controllers
             {
                 using (var _unitOfWork = new UnitOfWork())
                 {
-                    p_Category.Active = false;
+                    p_Category.IsActive = false;
 
                     _unitOfWork.CategoryRepository.Edit(p_Category);
                     _unitOfWork.Save();
