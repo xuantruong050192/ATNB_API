@@ -20,7 +20,7 @@ namespace DTO
 
         public int PublisherID { get; set; }
         public string PublisherName { get; set; }
-        public string Desciption { get; set; }
+        public string Description { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> Created { get; set; }
 

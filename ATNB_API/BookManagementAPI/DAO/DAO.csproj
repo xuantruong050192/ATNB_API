@@ -97,6 +97,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>BookManagementDbContext.edmx</DependentUpon>
       <LastGenOutput>BookManagementDbContext.cs</LastGenOutput>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

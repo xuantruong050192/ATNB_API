@@ -19,20 +19,26 @@ namespace BookManagementAPI.Controllers
             object obj;
             try
             {
-                using (var _unitOfWork = new UnitOfWork())
 
+                using (var _unitOfWork = new UnitOfWork())
+                {
+                    
                     obj = new
                     {
                         StatusCode = 200,
-                        data = _unitOfWork.CategoryRepository.GetAll().Where(x => (x.IsActive==true && x.CategoryName.Contains(searchname)) || (x.IsActive==true && searchname=="0")).OrderByDescending(x => x.Created).Skip(skip * pagesize).Take(pagesize).ToList(),
+                        data = _unitOfWork.CategoryRepository.GetAll().Where(x => (x.IsActive == true && x.CategoryName.Contains(searchname)) || (x.IsActive == true && searchname == "0")).OrderByDescending(x => x.Created).Skip(skip * pagesize).Take(pagesize).ToList(),
                         total = _unitOfWork._context.Categories.Count(x => (x.IsActive == true && x.CategoryName.Contains(searchname)) || (x.IsActive == true && searchname == "0"))
                     };
+
+                }
+
 
 
             }
             catch (Exception ex)
             {
                 obj = new { StatusCode = 500, data = new List<Category>() };
+                
             }
             return Request.CreateResponse(obj);
 
@@ -51,9 +57,43 @@ namespace BookManagementAPI.Controllers
                     obj = new
                     {
                         StatusCode = 200,
-                        data = _unitOfWork.CategoryRepository.GetAll().Where(x => x.IsActive == true && x.CategoryName.Contains(searchname)).OrderByDescending(x => x.Created).Skip(skip * pagesize).Take(pagesize).ToList(),
+                        data = _unitOfWork.CategoryRepository.GetAll().Where(x => x.IsActive == true && x.CategoryName.Contains(searchname)).OrderByDescending(x => x.CategoryID).Skip(skip * pagesize).Take(pagesize).ToList(),
                         total = _unitOfWork._context.Categories.Count(x => x.IsActive == true)
                     };
+
+
+            }
+            catch (Exception ex)
+            {
+                obj = new { StatusCode = 500, data = new List<Category>() };
+            }
+            return Request.CreateResponse(obj);
+
+
+
+        }
+        [HttpGet]
+        [Route("api/category/getall")]
+        public HttpResponseMessage getAllCategory()
+        {
+            object obj;
+            try
+            {
+                using (var _unitOfWork = new UnitOfWork())
+                {
+                    obj = new
+                    {
+                        StatusCode = 200,
+                        data = _unitOfWork.CategoryRepository.GetAll().Where(x => x.IsActive == true).Select(x => new { x.CategoryID, x.CategoryName }).ToList()
+
+
+
+
+                    };
+
+                };
+
+                    
 
 
             }

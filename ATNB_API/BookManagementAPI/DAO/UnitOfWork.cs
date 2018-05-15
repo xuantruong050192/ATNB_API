@@ -13,6 +13,7 @@ namespace DAO
         private IRepository<Author> _authorRepository;
         private IRepository<Publisher> _publisherRepository;
         private IRepository<User> _userRepository;
+        private IRepository<Book> _bookRepository;
         //private BookStoreDbContext _context;
         public BookManagementDbContext _context;
         public IRepository<Category> CategoryRepository
@@ -53,6 +54,16 @@ namespace DAO
                 if (_userRepository == null)
                    _userRepository = new Repository<User>(_context);
                 return _userRepository;
+            }
+        }
+        public IRepository<Book> BookRepository
+        {
+            get
+            {
+
+                if (_bookRepository == null)
+                    _bookRepository = new Repository<Book>(_context);
+                return _bookRepository;
             }
         }
 
